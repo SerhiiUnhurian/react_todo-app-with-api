@@ -243,7 +243,7 @@ export const App: React.FC = () => {
 
     if (newTodoTitle.length === 0) {
       onDeleteTodo(todo.id);
-      setTitleEditingId(null);
+      // setTitleEditingId(null);
 
       return;
     }
@@ -258,6 +258,7 @@ export const App: React.FC = () => {
       })
       .catch(error => {
         setErrorMessage('Unable to update a todo');
+        setTitleEditingId(todo.id);
         throw error;
       })
       .finally(() => {
@@ -282,14 +283,16 @@ export const App: React.FC = () => {
       <div className="todoapp__content">
         <header className="todoapp__header">
           {/* this button should have `active` class only if all todos are completed */}
-          <button
-            type="button"
-            className={classNames('todoapp__toggle-all', {
-              active: completedTodos.length === todos.length,
-            })}
-            data-cy="ToggleAllButton"
-            onClick={toggleAll}
-          />
+          {todos.length !== 0 && (
+            <button
+              type="button"
+              className={classNames('todoapp__toggle-all', {
+                active: completedTodos.length === todos.length,
+              })}
+              data-cy="ToggleAllButton"
+              onClick={toggleAll}
+            />
+          )}
 
           {/* Add a todo on form submit */}
           <form onSubmit={handleSubmit}>

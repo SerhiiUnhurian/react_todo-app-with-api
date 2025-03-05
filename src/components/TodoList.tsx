@@ -13,6 +13,7 @@ type Props = {
   editTodo: (todo: Todo, newTodoTitle: string) => void;
   titleEditingId: number | null;
   setTitleEditingId: (id: number | null) => void;
+  errorMessage: string;
 };
 
 export const TodoList: React.FC<Props> = ({
@@ -44,7 +45,7 @@ export const TodoList: React.FC<Props> = ({
     todo: Todo,
   ) => {
     event.preventDefault();
-    editTodo(todo, newTodoTitle);
+    editTodo(todo, newTodoTitle.trim());
   };
 
   return (
@@ -81,7 +82,7 @@ export const TodoList: React.FC<Props> = ({
                 }}
               >
                 <input
-                  data-cy="newTodoTitleField"
+                  data-cy="TodoTitleField"
                   type="text"
                   className="todo__title-field"
                   placeholder="Empty todo will be deleted"
@@ -93,7 +94,7 @@ export const TodoList: React.FC<Props> = ({
             ) : (
               <>
                 <span
-                  data-cy="newTodoTitle"
+                  data-cy="TodoTitle"
                   className="todo__title"
                   onDoubleClick={() => handleDoubleClick(todo)}
                 >
@@ -134,7 +135,7 @@ export const TodoList: React.FC<Props> = ({
               // defaultChecked={tempTodo.completed}
             />
           </label>
-          <span data-cy="newTodoTitle" className="todo__title">
+          <span data-cy="TodoTitle" className="todo__title">
             {tempTodo.title}
           </span>
           <button type="button" className="todo__remove" data-cy="TodoDelete">
