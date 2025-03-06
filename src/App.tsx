@@ -31,7 +31,7 @@ export const App: React.FC = () => {
   const notCompletedTodos = todos.filter(todo => !todo.completed);
 
   // eslint-disable-next-line @typescript-eslint/no-shadow
-  function filterTodos(todos: Todo[], filter: string) {
+  const filterTodos = (todos: Todo[], filter: string) => {
     const todosCopy = [...todos];
 
     return todosCopy.filter(todo => {
@@ -46,7 +46,7 @@ export const App: React.FC = () => {
           return true;
       }
     });
-  }
+  };
 
   useEffect(() => {
     if (inputRef.current) {
@@ -131,7 +131,6 @@ export const App: React.FC = () => {
   const onDeleteTodo = (todoId: number) => {
     setErrorMessage('');
     setLoading(true);
-    // setLoadingTodoId(todoId);
     setLoadingTodoIds(prev => new Set(prev).add(todoId));
 
     deleteTodo(todoId)
@@ -146,7 +145,6 @@ export const App: React.FC = () => {
       })
       .finally(() => {
         setLoading(false);
-        // setLoadingTodoId(null);
         setLoadingTodoIds(prevSet => {
           const newSet = new Set(prevSet);
 
@@ -165,7 +163,6 @@ export const App: React.FC = () => {
 
   const onToggle = (todo: Todo) => {
     setErrorMessage('');
-    // setLoadingTodoId(todo.id);
     setLoadingTodoIds(prev => new Set(prev).add(todo.id));
 
     updateTodo({ ...todo, completed: !todo.completed })
@@ -179,7 +176,6 @@ export const App: React.FC = () => {
         throw error;
       })
       .finally(() => {
-        // setLoadingTodoId(null);
         setLoadingTodoIds(prevSet => {
           const newSet = new Set(prevSet);
 
@@ -243,7 +239,6 @@ export const App: React.FC = () => {
 
     if (newTodoTitle.length === 0) {
       onDeleteTodo(todo.id);
-      // setTitleEditingId(null);
 
       return;
     }
@@ -282,7 +277,6 @@ export const App: React.FC = () => {
 
       <div className="todoapp__content">
         <header className="todoapp__header">
-          {/* this button should have `active` class only if all todos are completed */}
           {todos.length !== 0 && (
             <button
               type="button"
@@ -294,7 +288,6 @@ export const App: React.FC = () => {
             />
           )}
 
-          {/* Add a todo on form submit */}
           <form onSubmit={handleSubmit}>
             <input
               data-cy="NewTodoField"
