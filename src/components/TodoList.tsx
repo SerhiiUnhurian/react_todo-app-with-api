@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { Todo } from '../types/Todo';
-import classNames from 'classnames';
-import { TodoLoader } from './TodoLoader';
+// import classNames from 'classnames';
+// import { TodoLoader } from './TodoLoader';
 import { TodoItem } from './TodoItem';
+import { TempTodo } from './TempTodo';
 
 type Props = {
   todos: Todo[];
@@ -126,31 +127,32 @@ export const TodoList: React.FC<Props> = ({
       })}
 
       {tempTodo && (
-        <div
-          data-cy="Todo"
-          className={classNames('todo', {
-            completed: tempTodo.completed,
-          })}
-        >
-          <label
-            className="todo__status-label"
-            htmlFor={`todoStatus-${tempTodo.id}`}
-          >
-            <input
-              id={`todoStatus-${tempTodo.id}`}
-              data-cy="TodoStatus"
-              type="checkbox"
-              className="todo__status"
-            />
-          </label>
-          <span data-cy="TodoTitle" className="todo__title">
-            {tempTodo.title}
-          </span>
-          <button type="button" className="todo__remove" data-cy="TodoDelete">
-            ×
-          </button>
-          <TodoLoader loadingTodoIds={loadingTodoIds} todoId={0} />
-        </div>
+        // <div
+        //   data-cy="Todo"
+        //   className={classNames('todo', {
+        //     completed: tempTodo.completed,
+        //   })}
+        // >
+        //   <label
+        //     className="todo__status-label"
+        //     htmlFor={`todoStatus-${tempTodo.id}`}
+        //   >
+        //     <input
+        //       id={`todoStatus-${tempTodo.id}`}
+        //       data-cy="TodoStatus"
+        //       type="checkbox"
+        //       className="todo__status"
+        //     />
+        //   </label>
+        //   <span data-cy="TodoTitle" className="todo__title">
+        //     {tempTodo.title}
+        //   </span>
+        //   <button type="button" className="todo__remove" data-cy="TodoDelete">
+        //     ×
+        //   </button>
+        //   <TodoLoader loadingTodoIds={loadingTodoIds} todoId={0} />
+        // </div>
+        <TempTodo tempTodo={tempTodo} loadingTodoIds={loadingTodoIds} />
       )}
     </section>
   );
