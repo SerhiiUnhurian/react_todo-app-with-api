@@ -198,9 +198,14 @@ export const App: React.FC = () => {
     }
 
     setErrorMessage('');
-    setLoadingTodoIds(
-      prev => new Set([...prev, ...todoToUpdate.map(t => t.id)]),
-    );
+    setLoadingTodoIds(prev => {
+      const newSet = new Set(prev);
+
+      todoToUpdate.forEach(todo => newSet.add(todo.id));
+
+      return newSet;
+      // new Set([...prev, ...todoToUpdate.map(t => t.id)])
+    });
 
     Promise.all(
       todoToUpdate.map(todo => {
